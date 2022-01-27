@@ -1,0 +1,43 @@
+.nav {
+  position: fixed;
+  width: 100vw;
+  transition: 0.5s all ease-in-out;
+  z-index: 100;
+  .nav_content {
+    display: flex;
+    justify-content: space-between;
+    .nav_logo {
+      width: 100px;
+      margin-left: 20px;
+      object-fit: contain;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    .nav_avatar {
+      width: 30px;
+      object-fit: contain;
+      margin-right: 40px;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.nav.nav_black {
+  background: black;
+}
+
+@media (min-width: 768px) {
+  .nav {
+    .nav_content {
+      .nav_logo {
+        width: 150px;
+      }
+      .nav_avatar {
+        width: 40px;
+      }
+    }
+  }
+}
