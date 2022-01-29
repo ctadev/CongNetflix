@@ -12,19 +12,47 @@
     padding: 20px;
     -ms-overflow-style: none;
     scrollbar-width: none;
-    .row_poster {
-      max-height: 80px;
-      object-fit: contain;
-      margin-right: 10px;
-      transition: transform 450ms;
-      &:hover {
-        transform: scale(1.08);
-        opacity: 1;
-        cursor: pointer;
+    .cards {
+      position: relative;
+      &:hover .title {
+        animation: showTitle 0.3s ease-in-out forwards;
       }
-    }
-    .row_posterLarge {
-      max-height: 150px;
+      @keyframes showTitle {
+        from {
+          bottom: -50%;
+          opacity: 0;
+        }
+        to {
+          bottom: 5%;
+          opacity: 1;
+        }
+      }
+      .row_poster {
+        max-height: 80px;
+        object-fit: contain;
+        margin-right: 10px;
+        transition: transform 450ms;
+        &:hover {
+          transform: scale(1.08);
+          opacity: 1;
+          cursor: pointer;
+        }
+      }
+      .row_posterLarge {
+        max-height: 150px;
+      }
+      p {
+        color: white;
+        text-align: center;
+        overflow: hidden;
+        height: 1.3rem;
+        font-family: "Nunito", sans-serif;
+        position: absolute;
+        background-color: rgba(0, 0, 0, 0.486);
+        left: 1%;
+        bottom: -50%;
+        z-index: 1;
+      }
     }
   }
   .movies_container::-webkit-scrollbar {
@@ -38,11 +66,13 @@
       font-size: 1.5rem;
     }
     .movies_container {
-      .row_poster {
-        max-height: 150px;
-      }
-      .row_posterLarge {
-        max-height: 350px;
+      .cards {
+        .row_poster {
+          max-height: 150px;
+        }
+        .row_posterLarge {
+          max-height: 350px;
+        }
       }
     }
   }

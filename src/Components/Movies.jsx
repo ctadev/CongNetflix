@@ -25,14 +25,16 @@ function Movies({ title, fetchUrl, isLargeRow = false }) {
           (movie) =>
             ((isLargeRow && movie.poster_path) ||
               (!isLargeRow && movie.backdrop_path)) && (
-              <img
-                key={movie.id}
-                src={`${baseURL}${
-                  isLargeRow ? movie.poster_path : movie.backdrop_path
-                }`}
-                alt={movie.name}
-                className={`row_poster ${isLargeRow && "row_posterLarge"}`}
-              />
+              <div className="cards" key={movie.id}>
+                <img
+                  src={`${baseURL}${
+                    isLargeRow ? movie.poster_path : movie.backdrop_path
+                  }`}
+                  alt={movie.name}
+                  className={`row_poster ${isLargeRow && "row_posterLarge"}`}
+                />
+                <p className="title">{movie?.title || movie?.name || movie?.original_name}</p>
+              </div>
             )
         )}
       </div>
