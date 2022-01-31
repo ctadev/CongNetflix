@@ -13,7 +13,7 @@ function Banner() {
         const request = await axios.get(requests.fetchNetflixOriginals);
         setMovie(
           request.data.results[
-            Math.floor(Math.random() * request.data.results.length - 1)
+            Math.floor(Math.random() * request.data.results.length)
           ]
         );
         return request;
@@ -28,15 +28,19 @@ function Banner() {
     return string?.length > n ? string.substr(0, n - 1) + "..." : string;
   }
 
-  if (movie.length === 0 || movie === null) {
-    return <div className="banner"></div>;
+  if (movie.length === 0 || movie === null || movie === "undefined") {
+    return (
+      <div className="banner">
+        <h1>loading</h1>
+      </div>
+    );
   } else {
     return (
       <header
         className="banner"
         style={{
           backgroundImage: `url('https://image.tmdb.org/t/p/original/${
-            movie ? movie.backdrop_path : "/aGULNElJVpSru19WP2pUjopPX1U.jpg"
+            movie ? movie.backdrop_path : movie.poster_path
           }')`,
           backgroundSize: "cover",
           backgroundPosition: "center center",
@@ -51,7 +55,7 @@ function Banner() {
             <button className="banner_button">Play</button>
             <button className="banner_button">My List</button>
           </div>
-          <p className="banner_description">{truncate(movie.overview, 150)}</p>
+          <p className="banner_description">{truncate(movie.overview, 200)}</p>
         </div>
 
         <div className="overlay"></div>

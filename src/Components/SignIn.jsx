@@ -1,4 +1,4 @@
-import React, { useRef} from "react";
+import React, { useState } from "react";
 import "./signin.scss";
 import {
   createUserWithEmailAndPassword,
@@ -7,26 +7,22 @@ import {
 import { auth } from "../firebase";
 import { useSelector, useDispatch } from "react-redux";
 import { toggle } from "../GlobalState/loginToggleSlice";
+import { useNavigate } from "react-router-dom";
 
 function SignIn() {
   const showRegister = useSelector((state) => state.loginToggleSlice);
   const dispatch = useDispatch();
-  const emailRef = useRef(null);
-  const passwordRef = useRef(null);
-  const createemailRef = useRef(null);
-  const createpasswordRef = useRef(null);
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [createEmail, setCreateEmail] = useState("");
+  const [createPassword, setCreatePassword] = useState("");
 
   const signIn = async (e) => {
     e.preventDefault();
     try {
-      const user = await signInWithEmailAndPassword(
-        auth,
-        emailRef.current.value,
-        passwordRef.current.value
-      );
-      emailRef.current.value = "";
-      passwordRef.current.value = "";
-      console.log(user);
+      await signInWithEmailAndPassword(auth, email, password);
+      navigate("/");
     } catch (error) {
       alert(error.message);
     }
@@ -35,14 +31,7 @@ function SignIn() {
   const register = async (e) => {
     e.preventDefault();
     try {
-      const user = await createUserWithEmailAndPassword(
-        auth,
-        createemailRef.current.value,
-        createpasswordRef.current.value
-      );
-      createemailRef.current.value = "";
-      createpasswordRef.current.value = "";
-      console.log(user);
+      await createUserWithEmailAndPassword(auth, createEmail, createPassword);
     } catch (error) {
       alert(error.message);
     }
@@ -54,9 +43,15 @@ function SignIn() {
         <div className="sign_in">
           <form>
             <h1>Create Account</h1>
-            <input ref={createemailRef} type="email" placeholder="Email" />
             <input
-              ref={createpasswordRef}
+              value={createEmail}
+              onChange={(e) => setCreateEmail(e.target.value)}
+              type="email"
+              placeholder="Email"
+            />
+            <input
+              value={createPassword}
+              onChange={(e) => setCreatePassword(e.target.value)}
               type="password"
               placeholder="Password"
             />
@@ -67,11 +62,21 @@ function SignIn() {
         <div className="sign_in">
           <form>
             <h1>Sign In</h1>
-            <input ref={emailRef} type="email" placeholder="Email" />
-            <input ref={passwordRef} type="password" placeholder="Password" />
+            <input
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              type="email"
+              placeholder="Email"
+            />
+            <input
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              type="password"
+              placeholder="Password"
+            />
             <button onClick={signIn}>Log In</button>
             <p>
-              New to Netflix?{" "}
+              New to Netflix?
               <span onClick={() => dispatch(toggle(true))}>Sign Up Now.</span>
             </p>
           </form>

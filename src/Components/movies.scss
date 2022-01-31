@@ -1,57 +1,93 @@
 .movies_list {
   margin-left: 20px;
+  position: relative;
   h1 {
     font-family: "Mochiy Pop P One", sans-serif;
     color: white;
     font-size: 1rem;
   }
   .movies_container {
-    display: flex;
-    overflow-y: hidden;
-    overflow-x: scroll;
-    padding: 20px;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-    .cards {
-      position: relative;
-      &:hover .title {
-        animation: showTitle 0.3s ease-in-out forwards;
-      }
-      @keyframes showTitle {
-        from {
-          bottom: -50%;
-          opacity: 0;
-        }
-        to {
-          bottom: 5%;
-          opacity: 1;
-        }
-      }
-      .row_poster {
-        max-height: 80px;
-        object-fit: contain;
-        margin-right: 10px;
-        transition: transform 450ms;
-        &:hover {
-          transform: scale(1.08);
-          opacity: 1;
-          cursor: pointer;
-        }
-      }
-      .row_posterLarge {
-        max-height: 150px;
-      }
-      p {
+    position: relative;
+    .left-btn {
+      position: absolute;
+      left: 0;
+      top: 25%;
+      height: 50%;
+      width: 100px;
+      z-index: 2;
+      background: rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+      display: none;
+      i {
         color: white;
-        text-align: center;
-        overflow: hidden;
-        height: 1.3rem;
-        font-family: "Nunito", sans-serif;
-        position: absolute;
-        background-color: rgba(0, 0, 0, 0.486);
-        left: 1%;
-        bottom: -50%;
-        z-index: 1;
+        font-size: 3rem;
+      }
+    }
+
+    .right-btn {
+      position: absolute;
+      right: 0;
+      top: 25%;
+      height: 50%;
+      width: 100px;
+      z-index: 2;
+      background: rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+      display: none;
+      i {
+        color: white;
+        font-size: 3rem;
+      }
+    }
+    .wrapper {
+      display: flex;
+      overflow-y: hidden;
+      overflow-x: scroll;
+      scroll-behavior: smooth;
+      padding: 20px;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+      .cards {
+        position: relative;
+        &:hover .title {
+          animation: showTitle 0.3s ease-in-out forwards;
+        }
+        @keyframes showTitle {
+          from {
+            bottom: -50%;
+            opacity: 0;
+          }
+          to {
+            bottom: 5%;
+            opacity: 1;
+          }
+        }
+        .row_poster {
+          max-height: 80px;
+          object-fit: contain;
+          margin-right: 10px;
+          transition: transform 450ms;
+          &:hover {
+            transform: scale(1.08);
+            opacity: 1;
+            cursor: pointer;
+          }
+        }
+        .row_posterLarge {
+          max-height: 150px;
+        }
+        p {
+          color: white;
+          text-align: center;
+          overflow: hidden;
+          height: 1.3rem;
+          font-family: "Nunito", sans-serif;
+          position: absolute;
+          background-color: rgba(0, 0, 0, 0.486);
+          left: 1%;
+          bottom: -50%;
+          z-index: 1;
+        }
       }
     }
   }
@@ -66,13 +102,28 @@
       font-size: 1.5rem;
     }
     .movies_container {
-      .cards {
-        .row_poster {
-          max-height: 150px;
+      .wrapper {
+        .cards {
+          .row_poster {
+            max-height: 150px;
+          }
+          .row_posterLarge {
+            max-height: 350px;
+          }
         }
-        .row_posterLarge {
-          max-height: 350px;
-        }
+      }
+    }
+  }
+}
+
+@media (min-width: 1440px) {
+  .movies_list {
+    .movies_container {
+      .left-btn {
+        display: block;
+      }
+      .right-btn {
+        display: block;
       }
     }
   }
