@@ -13,14 +13,17 @@
       left: 0;
       top: 25%;
       height: 50%;
-      width: 100px;
+      width: 50px;
       z-index: 2;
       background: rgba(0, 0, 0, 0.3);
       cursor: pointer;
       display: none;
+      &:hover {
+        background: rgba(245, 245, 245, 0.301);
+      }
       i {
         color: white;
-        font-size: 3rem;
+        font-size: 1.5rem;
       }
     }
 
@@ -29,14 +32,17 @@
       right: 0;
       top: 25%;
       height: 50%;
-      width: 100px;
+      width: 50px;
       z-index: 2;
       background: rgba(0, 0, 0, 0.3);
       cursor: pointer;
       display: none;
+      &:hover {
+        background: rgba(245, 245, 245, 0.301);
+      }
       i {
         color: white;
-        font-size: 3rem;
+        font-size: 1.5rem;
       }
     }
     .wrapper {
@@ -90,9 +96,12 @@
         }
       }
     }
-  }
-  .movies_container::-webkit-scrollbar {
-    display: none;
+    .wrapper::-webkit-scrollbar {
+      display: none;
+      overflow: auto;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
   }
 }
 
